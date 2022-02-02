@@ -43,10 +43,13 @@ jobs:
         run: |
           docker rmi `docker images -q`
           sudo rm -rf /usr/share/dotnet /var/lib/mysql /etc/mysql /etc/php /etc/apt/sources.list.d
-          sudo apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
-          sudo apt-get update
-          sudo apt-get -y autoremove --purge
-          sudo apt-get clean
+          sudo mkdir ./etc/php ./etc/php/7.4 ./etc/php/8.0 ./etc/php/8.1
+          sudo mkdir ./etc/php/7.4/fpm ./etc/php/8.0/fpm ./etc/php/8.1/fpm
+          sudo mkdir ./etc/php/7.4/fpm/php-fpm.conf ./etc/php/8.0/fpm/php-fpm.conf ./etc/php/8.1/fpm/php-fpm.conf
+          sudo -E apt-get -y purge azure-cli ghc* zulu* hhvm llvm* firefox google* dotnet* powershell openjdk* mysql* php*
+          sudo -E apt-get update
+          sudo -E apt-get -y autoremove --purge
+          sudo -E apt-get clean
           df -h
 
       - name: Configuration Environment‌‌...
